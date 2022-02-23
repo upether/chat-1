@@ -13,7 +13,6 @@ io.on("connection", (socket) => {
     io.emit("message", { name, message });
   });
 });
-
 server.listen(4000, function () {
   console.log("listening on port 4000");
 });
