@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import TextField from "@material-ui/core/TextField";
 import "./App.css";
+import { Button } from "react-bootstrap";
 
 const socket = io.connect("http://localhost:4000");
 
@@ -59,6 +60,10 @@ function App() {
           />
         </div>
         <button>Send Message</button>
+        <br />
+        <Button variant="primary">공용방</Button>{" "}
+        <Button variant="primary">비트코인 방</Button>{" "}
+        <Button variant="primary">이더리움 방</Button>{" "}
       </form>
       <div className="render-chat">
         <h1>Chat log</h1>

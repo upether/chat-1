@@ -8,6 +8,8 @@ const io = require("socket.io")(server, {
   },
 });
 
+const roomList = {};
+
 io.on("connection", (socket) => {
   socket.on("message", ({ name, message }) => {
     io.emit("message", { name, message });
