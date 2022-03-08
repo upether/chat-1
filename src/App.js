@@ -10,16 +10,13 @@ function App() {
   const [state, setState] = useState({ message: "", name: "" });
   const [chat, setChat] = useState([]);
   const [room, setRoom] = useState("default");
-  const chatRef = useRef([]);
+
   useEffect(() => {
     socket.emit("join Room", { roomId: room });
     socket.on('message', ({ name, message }) => {
-      console.log(chatRef.current)
-      setChat([...chatRef.current, { name, message }])
-      chatRef.current.push({ name, message })
-    })
-    console.log("asdf")
+      setChat((prev) => ([...prev, { name, message }]));
 
+    })
     return () => {
       socket.removeAllListeners();
     } // 이부분 없으면 렌더링 종료시에 socket 제거가 안됨.
@@ -53,7 +50,6 @@ function App() {
     console.log("asdf")
     socket.emit("join Room", { roomId });
     setChat([...chat, { name: "관리자", message: `${roomId} 로 방이 바뀜` }]);
-    chatRef.current.push({ name: "관리자", message: `${roomId} 로 방이 바뀜` });
     setRoom(roomId);
   };
 
@@ -63,6 +59,7 @@ function App() {
         <form onSubmit={onMessageSubmit}>
           <div>현재 조인된 룸 : {room}</div>
           <h1>Message</h1>
+          <div>{state.name}</div>
           <div className="name-field">
             <TextField
               name="name"
